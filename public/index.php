@@ -1,5 +1,8 @@
 <?php
 
-namespace App;
+use app\Kernel;
 
-$app = new App();
+require "../vendor/autoload.php";
+
+$app = new Kernel();
+$app->run();
