@@ -18,13 +18,14 @@ cp config.example.php config.php
 Далее запустим docker (команду выполнять из корня проекта)
 
 ```bash
-docker-compose up -d
+docker-compose build
+docker-compose up
 ```
 
 После чего приложение будет доступно по адресу:
 
 ```bash
-http://127.0.0.1:8000/api/v1/applications
+http://localhost:8000
 ```
 
 ## Использование
