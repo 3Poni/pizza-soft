@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www/
+    container_name: project_app
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+networks:
+  app-network:
