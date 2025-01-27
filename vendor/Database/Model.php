@@ -31,7 +31,7 @@ class Model implements DriverContract
 
         switch (DBDRIVER) {
             case 'mysql':
-                $this->driver = new MySqlDriver();
+                $this->driver = new MySqlDriver(self::$table);
                 break;
             case 'file-json':
                 $this->driver = new JsonFileDriver(self::$table);
