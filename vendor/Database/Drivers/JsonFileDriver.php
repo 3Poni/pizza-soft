@@ -17,6 +17,9 @@ class JsonFileDriver implements DriverContract
         if(!defined("DBPATH")) throw new \Exception("DBPATH is not defined");
         $this->filePath = PROJECT_PATH . DBPATH . $this->fileName . '.json';
         // Ensure the file exists
+        if (!is_dir(PROJECT_PATH . DBPATH)) {
+            mkdir(PROJECT_PATH . DBPATH, 0777);
+        }
         if (!file_exists($this->filePath)) {
             file_put_contents($this->filePath, json_encode([]), LOCK_EX);
         }
