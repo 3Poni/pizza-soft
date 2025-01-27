@@ -7,5 +7,4 @@ interface DriverContract {
     public function getById($id);
     public function create($item);
     public function update($id, $upd_field, $upd_value);
-    public function delete($id);
 }
