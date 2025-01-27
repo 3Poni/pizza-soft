@@ -82,3 +82,22 @@ http://localhost:8000
         "items": "[1,2,3,4]",
 }
 ```
+
+## База данных
+
+В конфиге можно выбрать один из двух типов БД: 'file-json', 'mysql'
+
+В случае выбора mysql необходимо завести таблицу orders:
+```bash
+CREATE TABLE IF NOT EXISTS `orders` (
+  `order_id` varchar(255) NOT NULL,
+  `items` json DEFAULT NULL,
+  `done` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+В проект также добавил файл test.sql для импорта БД с таблицой orders
+
+Внимание! test.sql удалит базу данных с именем test, если она существует
+
