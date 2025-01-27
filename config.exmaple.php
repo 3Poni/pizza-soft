@@ -21,7 +21,7 @@ const ERROR_LOG_PATH = PROJECT_PATH . '/logs/';
 
 /**
  *
- *
+ * Ключ для аутентификации
  *
  * */
 const AUTH_KEY = '123456';
