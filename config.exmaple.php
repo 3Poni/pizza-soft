@@ -28,6 +28,14 @@ const AUTH_KEY = '123456';
 
 /**
  *  Конфигурация базы данных
+ *
+ *  2 драйвера БД: file-json - для json Файла, mysql - для mysql
+ *
+ *  Для mysql также необходимо установить:
+ *  DBHOST - хост бд (пример: "localhost")
+ *  DBNAME - имя бд (пример: "test")
+ *  DBUSER - юзер в бд (пример: "root")
+ *  DBPASS - пароль в бд (пример: "123")
  */
 defined("DBPATH") or define("DBPATH", "/database/");
 defined("DBDRIVER") or define("DBDRIVER", "file-json");
