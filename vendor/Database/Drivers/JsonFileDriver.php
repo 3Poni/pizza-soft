@@ -57,7 +57,7 @@ class JsonFileDriver implements DriverContract
     {
         $data = $this->readData();
         // Generate a unique ID
-        $id = $this->get_primary_key($data);
+        $id = self::get_primary_key($data);
         $item[$this->primary_key] = $id;
 
         $data[$id] = $item;
@@ -70,7 +70,7 @@ class JsonFileDriver implements DriverContract
         return substr_replace($this->fileName, '', -1);
     }
 
-    private function get_primary_key($data, $min_length = 3, $max_length = 15): string
+    public static function get_primary_key($data, $min_length = 3, $max_length = 15): string
     {
         $existing_keys = array_keys($data);
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -93,14 +93,7 @@ class JsonFileDriver implements DriverContract
 
         foreach ($data as &$item) {
             if ($item[$this->primary_key] == $id) {
-                switch (gettype($upd_value)) {
-                    case 'array':
-                        $item[$upd_field] = array_merge($item[$upd_field], $upd_value);
-                        break;
-                    default:
-                        $item[$upd_field] = $upd_value;
-                        break;
-                }
+                $item[$upd_field] = $upd_value;
                 $this->writeData($data);
                 return $item;
             }
@@ -121,8 +114,4 @@ class JsonFileDriver implements DriverContract
         return false;
     }
 
-    public function store()
-    {
-        // TODO: Implement store() method.
-    }
 }

@@ -28,18 +28,24 @@ class OrderController
             $orders = $orders->getAll();
         }
 
+        foreach($orders as &$order) {
+            // Это нужно только, чтобы при ответе был единый формат независимо от БД
+            $order['items'] = $this->convert_to_array($order['items']);
+        }
+
         $this->response->setData($orders);
         $this->response->send();
     }
     public function show()
     {
         $id = $this->request->getQueryParam('id');
-        $orders = (new Order())->getById($id);
+        $order = (new Order())->getById($id);
 
-        if($orders === null) {
+        if($order === null) {
             $this->response->not_found('Order not found');
         }
-        $this->response->setData($orders);
+        $order['items'] = $this->convert_to_array($order['items']);
+        $this->response->setData($order);
         $this->response->send();
     }
     public function create()
@@ -85,6 +91,9 @@ class OrderController
         if($order_get === null || $order_get['done'] === false) {
             $this->response->not_found('Order not found');
         }else{
+            $order_items = $this->convert_to_array($order_get['items']);
+            $items = array_merge($items, $order_items);
+
             $order_updated = $order->update($id, 'items', $items);
             $this->response->success($order_updated,'Order updated');
         }
@@ -103,5 +112,10 @@ class OrderController
         }
 
         $this->response->send();
+    }
+
+    private function convert_to_array($data)
+    {
+        return is_array($data) ? $data : json_decode($data, true);
     }
 }
